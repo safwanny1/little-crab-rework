@@ -4,7 +4,7 @@ public class CrabWorld extends World
 {
     // Fields for counters
     private int currentLevel = 1;
-    private int wormsNeeded;
+    private int fishNeeded;
     private int score = 0;
     private int attempts = 0;
     private int highestLevel = 1;
@@ -28,7 +28,7 @@ public class CrabWorld extends World
         GreenfootImage background = new GreenfootImage("underwater.jpg");
         setBackground(background);
         
-        wormsNeeded = 5;  // Initial worms needed - starting a bit easier
+        fishNeeded = 5;  // Initial fish needed - starting a bit easier
         setupInfoDisplay();
         prepareLevel();
         attempts++;
@@ -48,7 +48,7 @@ public class CrabWorld extends World
                 gameOverState = false;
                 isPaused = false;
                 currentLevel = 1;
-                wormsNeeded = 5;  // Reset to initial worms needed
+                fishNeeded = 5;  // Reset to initial fish needed
                 score = 0;  // Reset score for new game
                 prepareLevel();
             } 
@@ -93,20 +93,20 @@ public class CrabWorld extends World
     }
     
     /**
-     * Calculate the number of lobsters for the current level
-     * Following pattern: add lobster, add lobster, speed up, add lobster, add lobster, speed up...
+     * Calculate the number of sharks for the current level
+     * Following pattern: add shark, add shark, speed up, add shark, add shark, speed up...
      */
-    private int calculateLobsterCount() {
-        // Every third level increases speed instead of adding lobsters
-        // Level 1: 1 lobster, Level 2: 2 lobsters, Level 3: 2 faster lobsters, etc.
+    private int calculateSharkCount() {
+        // Every third level increases speed instead of adding sharks
+        // Level 1: 1 shark, Level 2: 2 sharks, Level 3: 2 faster sharks, etc.
         return (currentLevel + 1) / 2 + (currentLevel <= 2 ? 0 : 1);
     }
     
     /**
-     * Calculate the speed of lobsters for the current level
+     * Calculate the speed of sharks for the current level
      * Speed increases every 3rd level
      */
-    private int calculateLobsterSpeed() {
+    private int calculateSharkSpeed() {
         // Start with speed 3, increase by 1 every third level
         return 3 + (currentLevel - 1) / 3;
     }
@@ -126,17 +126,17 @@ public class CrabWorld extends World
         Crab crab = new Crab(this);
         addObject(crab, getWidth() / 2, getHeight() / 2);
         
-        // Add worms - number based on level
-        for (int i = 0; i < wormsNeeded; i++) {
+        // Add fish - number based on level
+        for (int i = 0; i < fishNeeded; i++) {
             addWormAtRandomPosition();
         }
         
-        // Add balanced number of lobsters with appropriate speed
-        int numLobsters = calculateLobsterCount();
-        int lobsterSpeed = calculateLobsterSpeed();
+        // Add balanced number of sharks with appropriate speed
+        int numSharks = calculateSharkCount();
+        int SharkSpeed = calculateSharkSpeed();
         
-        for (int i = 0; i < numLobsters; i++) {
-            addLobsterAtRandomPosition(lobsterSpeed);
+        for (int i = 0; i < numSharks; i++) {
+            addSharkAtRandomPosition(SharkSpeed);
         }
     }
     
@@ -151,7 +151,7 @@ public class CrabWorld extends World
             x = Greenfoot.getRandomNumber(getWidth());
             y = Greenfoot.getRandomNumber(getHeight());
             
-            // Keep the worms away from the center where the crab starts
+            // Keep the fish away from the center where the crab starts
             validPosition = (Math.abs(x - getWidth()/2) > 100 || 
                             Math.abs(y - getHeight()/2) > 100);
             
@@ -161,13 +161,13 @@ public class CrabWorld extends World
     }
     
     /**
-     * Add a lobster at a random position with specified speed
+     * Add a shark at a random position with specified speed
      */
-    private void addLobsterAtRandomPosition(int speed) {
+    private void addSharkAtRandomPosition(int speed) {
         int x = Greenfoot.getRandomNumber(getWidth());
         int y = Greenfoot.getRandomNumber(getHeight());
         
-        // Keep lobsters away from the center where the crab starts
+        // Keep sharks away from the center where the crab starts
         if (Math.abs(x - getWidth()/2) < 150 && Math.abs(y - getHeight()/2) < 150) {
             // If too close to center, move to a corner
             x = x < getWidth()/2 ? Greenfoot.getRandomNumber(150) : getWidth() - Greenfoot.getRandomNumber(150);
@@ -195,7 +195,7 @@ public class CrabWorld extends World
         }
         
         // Increase difficulty
-        wormsNeeded = Math.min(5 + currentLevel, 15);  // Start with 5, cap at 15 worms
+        fishNeeded = Math.min(5 + currentLevel, 15);  // Start with 5, cap at 15 fish
         
         // Display level completed message
         showText("Level " + (currentLevel-1) + " completed! Press SPACE to continue.", getWidth()/2, getHeight()/2);
@@ -244,7 +244,7 @@ public class CrabWorld extends World
     }
     
     /**
-     * Add points to the score (called when eating worms)
+     * Add points to the score (called when eating fish)
      */
     public void addScore(int points)
     {
@@ -252,7 +252,7 @@ public class CrabWorld extends World
         updateCounters();
     }
     
-    public int getWormsNeeded() {
-        return wormsNeeded;
+    public int getFishNeeded() {
+        return fishNeeded;
     }
 }
