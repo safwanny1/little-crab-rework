@@ -4,7 +4,7 @@ public class Crab extends Actor
 {
     private GreenfootImage image1;
     private GreenfootImage image2;
-    private int wormsEaten;
+    private int fishEaten;
     private CrabWorld myWorld;
     
     /**
@@ -15,7 +15,7 @@ public class Crab extends Actor
         image1 = new GreenfootImage("crab.png");
         image2 = new GreenfootImage("crab2.png");
         setImage(image1);
-        wormsEaten = 0;
+        fishEaten = 0;
         myWorld = world;
     }
         
@@ -89,7 +89,7 @@ public class Crab extends Actor
     
     /**
      * Check whether we have stumbled upon a worm.
-     * If we have, eat it. If we have eaten enough worms to complete
+     * If we have, eat it. If we have eaten enough fish to complete
      * the level, tell the world we're done.
      */
     public void lookForWorm()
@@ -99,11 +99,11 @@ public class Crab extends Actor
             removeTouching(Fish.class);
             Greenfoot.playSound("slurp.wav");
             
-            wormsEaten++;
+            fishEaten++;
             myWorld.addScore(1);  // Add 1 point for each worm eaten
             
-            // Check if we've eaten enough worms to complete the level
-            if (wormsEaten >= myWorld.getWormsNeeded()) 
+            // Check if we've eaten enough fish to complete the level
+            if (fishEaten >= myWorld.getFishNeeded()) 
             {
                 myWorld.levelCompleted();
             }
