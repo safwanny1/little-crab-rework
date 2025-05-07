@@ -5,17 +5,17 @@ import greenfoot.*;
  */
 public class Counter extends Actor
 {
-    private int value = 0;
-    private String prefix;
+    private int startValue = 0;
+    private String counterPrefix;
     
     public Counter()
     {
-        this("");
+        counterPrefix("");
     }
     
     public Counter(String prefix)
     {
-        this.prefix = prefix;
+        counterPrefix = prefix;
         updateImage();
     }
     
@@ -24,7 +24,7 @@ public class Counter extends Actor
      */
     public void setValue(int newValue)
     {
-        value = newValue;
+        startValue = newValue;
         updateImage();
     }
     
@@ -33,7 +33,7 @@ public class Counter extends Actor
      */
     public void increment()
     {
-        value++;
+        startValue++;
         updateImage();
     }
     
@@ -42,7 +42,7 @@ public class Counter extends Actor
      */
     public int getValue()
     {
-        return value;
+        return startValue;
     }
     
     /**
