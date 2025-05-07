@@ -5,7 +5,7 @@ public class Shark extends Actor
     private int sharkSpeed;
     
     /**
-     * Create a lobster with specified movement speed.
+     * Create a shark with specified movement speed.
      */
     public Shark(int speed)
     {
@@ -14,7 +14,7 @@ public class Shark extends Actor
     }
 
     /**
-     * Do whatever lobsters do.
+     * Do whatever sharks do.
      */
     public void act()
     {
